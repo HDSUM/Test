@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Php on JeremyL&#39;s Blog</title>
+    <link>https://hdsum.github.io/tags/php/</link>
+    <description>Recent content in Php on JeremyL&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hdsum.github.io/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cookie</title>
+      <link>https://hdsum.github.io/2018/12/cookie/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/cookie/</guid>
+      <description>Cookie 简介 &amp;emsp;&amp;emsp;Cookie是存储在客户端浏览器中的数据，我们通过Cookie来跟踪与存储用户数据。一般情况下，Cookie通过HTTP headers从服务端返回到客户端。多数web程序都支持Cookie的操作，因为Cookie是存在于HTTP的标头之中，所以必须在其他信息输出以前进行设置，类似于header函数的使用限制。
+&amp;emsp;&amp;emsp;PHP通过setcookie函数进行Cookie的设置，任何从浏览器发回的Cookie，PHP都会自动的将他存储在$_COOKIE的全局变量之中，因此我们可以通过 $_COOKIE[&amp;lsquo;key&amp;rsquo;]的形式来读取某个Cookie值。
+&amp;emsp;&amp;emsp;PHP中的Cookie具有非常广泛的使用，经常用来存储用户的登录信息，购物车等，且在使用会话Session时通常使用Cookie来存储会话id来识别用户，Cookie具备有效期，当有效期结束之后，Cookie会自动的从客户端删除。同时为了进行安全控制，Cookie还可以设置域跟路径，我们会在稍后的章节中详细的讲解他们。
+设置Cookie &amp;emsp;&amp;emsp;PHP设置Cookie最常用的方法就是使用setcookie函数，setcookie具有7个可选参数，我们常用到的为前5个：
+ name（ Cookie名）可以通过$_COOKIE[&amp;lsquo;name&amp;rsquo;] 进行访问 value（Cookie的值） expire（过期时间）Unix时间戳格式，默认为0，表示浏览器关闭即失效 path（有效路径）如果路径设置为&amp;rsquo;/&amp;lsquo;，则整个网站都有效 domain（有效域）默认整个域名都有效，如果设置了&amp;rsquo;www.imooc.com&amp;rsquo;,则只在www子域中有效  $value = &#39;test&#39;; setcookie(&amp;quot;TestCookie&amp;quot;, $value); setcookie(&amp;quot;TestCookie&amp;quot;, $value, time()+3600); //有效期一小时 setcookie(&amp;quot;TestCookie&amp;quot;, $value, time()+3600, &amp;quot;/path/&amp;quot;, &amp;quot;imooc.com&amp;quot;); //设置路径与域  &amp;emsp;&amp;emsp;PHP中还有一个设置Cookie的函数setrawcookie，setrawcookie跟setcookie基本一样，唯一的不同就是value值不会自动的进行urlencode，因此在需要的时候要手动的进行urlencode。
+setrawcookie(&#39;cookie_name&#39;, rawurlencode($value), time()+60*60*24*365);  因为Cookie是通过HTTP标头进行设置的，所以也可以直接使用header方法进行设置。
+header(&amp;quot;Set-Cookie:cookie_name=value&amp;quot;);  删除cookie 在PHP中删除cookie也是采用setcookie函数来实现。
+setcookie(&#39;test&#39;, &#39;&#39;, time()-1); // 设置 修改存活时间  &amp;emsp;&amp;emsp;可以看到将cookie的过期时间设置到当前时间之前，则该cookie会自动失效，也就达到了删除cookie的目的。
+&amp;emsp;&amp;emsp;之所以这么设计是因为cookie是通过HTTP的标头来传递的，客户端根据服务端返回的Set-Cookie段来进行cookie的设置，如果删除cookie需要使用新的Del-Cookie来实现，则HTTP头就会变得复杂，实际上仅通过Set-Cookie就可以简单明了的实现Cookie的设置、更新与删除。
+了解原理以后，我们也可以直接通过header来删除cookie。
+header(&amp;quot;Set-Cookie:test=1393832059; expires=&amp;quot;.gmdate(&#39;D, d M Y H:i:s \G\M\T&#39;, time()-1)); // 设置头部 修改Cookie的值以及存活时间  这里用到了gmdate，用来生成格林威治标准时间，以便排除时差的影响。
+cookie的有效路径 &amp;emsp;&amp;emsp;cookie中的路径用来控制设置的cookie在哪个路径下有效，默认为&amp;rsquo;/&amp;lsquo;，在所有路径下都有，当设定了其他路径之后，则只在设定的路径以及子路径下有效，例如：</description>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>https://hdsum.github.io/2018/12/mysql/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/mysql/</guid>
+      <description>数据库拓展 mysqli扩展：
+$link = mysqli_connect(&#39;mysql_host&#39;, &#39;mysql_user&#39;, &#39;mysql_password&#39;,&#39;database&#39;); $link = new mysqli(&#39;mysql_host&#39;, &#39;mysql_user&#39;, &#39;mysql_password&#39;,&#39;database&#39;);  PDO扩展
+$dsn = &#39;mysql:dbname=testdb;host=127.0.0.1&#39;; $user = &#39;dbuser&#39;; $password = &#39;dbpass&#39;; $dbh = new PDO($dsn, $user, $password);  连接MySQL数据库 &amp;emsp;&amp;emsp;PHP要对数据库进行操作，首先要做的是与数据库建立连接，通常我们使用mysql_connect函数( new mysqli对象 )&amp;emsp;进行数据库连接，该函数需要指定数据库的地址，用户名及密码。
+$host = &#39;localhost&#39;; $user = &#39;user&#39;; $pass = &#39;password&#39;; $database = &#39;database&#39;; $link = mysql_connect($host, $user, $pass[, $database]); // 面向过程的连接 $link = new mysqli($host, $user, $pass[, $database]); // 面向对象的连接  PHP连接数据库的方式类似于直接在命令行下通过进行连接，类似：
+mysql -hlocalhost -uuser -p  选择数据库 通过&amp;emsp;mysql_select_db函数( mysqli-&amp;gt;select_db()函数 )&amp;emsp;来选择数据库。</description>
+    </item>
+    
+    <item>
+      <title>Session</title>
+      <link>https://hdsum.github.io/2018/12/session/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/session/</guid>
+      <description>Session 简介 &amp;emsp;&amp;emsp;cookie将数据存储在客户端，建立起用户与服务器之间的联系，通常可以解决很多问题，但是cookie仍然具有一些局限：
+ cookie相对不是太安全，容易被盗用导致cookie欺骗 单个cookie的值最大只能存储4k 每次请求都要进行网络传输，占用带宽  &amp;emsp;&amp;emsp;session是将用户的会话数据存储在服务端，没有大小限制，通过一个session_id进行用户识别，PHP默认情况下session id是通过cookie来保存的，因此从某种程度上来说，seesion依赖于cookie。但这不是绝对的，session id也可以通过参数来实现，只要能将session id传递到服务端进行识别的机制都可以使用session。
+使用Session &amp;emsp;&amp;emsp;在PHP中使用session非常简单，先执行session_start方法开启session，然后通过全局变量$_SESSION进行session的读写。
+session_start(); $_SESSION[&#39;test&#39;] = time(); var_dump($_SESSION);  &amp;emsp;&amp;emsp;session会自动的对要设置的值进行encode与decode，因此session可以支持任意数据类型，包括数据与对象等。
+session_start(); $_SESSION[&#39;ary&#39;] = array(&#39;name&#39; =&amp;gt; &#39;jobs&#39;); $_SESSION[&#39;obj&#39;] = new stdClass(); var_dump($_SESSION);  &amp;emsp;&amp;emsp;默认情况下，session是以文件形式存储在服务器上的，因此当一个页面开启了session之后，会独占这个session文件，这样会导致当前用户的其他并发访问无法执行而等待。可以采用缓存或者数据库的形式存储来解决这个问题。
+删除和销毁Session &amp;emsp;&amp;emsp;删除某个session值可以使用PHP的unset函数，删除后就会从全局变量$_SESSION中去除，无法访问。
+session_start(); $_SESSION[&#39;name&#39;] = &#39;jobs&#39;; unset($_SESSION[&#39;name&#39;]); echo $_SESSION[&#39;name&#39;]; //提示name不存在  &amp;emsp;&amp;emsp;如果要删除所有的session，可以使用session_destroy函数销毁当前session，session_destroy会删除所有数据，但是session_id仍然存在。
+session_start(); $_SESSION[&#39;name&#39;] = &#39;jobs&#39;; $_SESSION[&#39;time&#39;] = time(); session_destroy();  &amp;emsp;&amp;emsp;值得注意的是，session_destroy并不会立即的销毁全局变量$_SESSION中的值，只有当下次再访问的时候，$_SESSION才为空，因此如果需要立即销毁$_SESSION，可以使用unset函数。
+session_start(); $_SESSION[&#39;name&#39;] = &#39;jobs&#39;; $_SESSION[&#39;time&#39;] = time(); unset($_SESSION[&#39;name&#39;]); // 删除Session[&#39;name&#39;] 无法取值 session_destroy(); // 删除所有Session 但还可以通过$_SESSION取出 var_dump($_SESSION); // 此时已为空  &amp;emsp;&amp;emsp;如果需要同时销毁cookie中的session_id，通常在用户退出的时候可能会用到，则还需要显式的调用setcookie方法删除session_id的cookie值。</description>
+    </item>
+    
+    <item>
+      <title>变量类型</title>
+      <link>https://hdsum.github.io/2018/12/%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B/</guid>
+      <description>数据类型 &amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;字符串、整数、浮点数、逻辑，数组、对象，NULL。
+&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;PHP为弱类型语言，在定义变量之后依然可以改变变量的类型和内容。
+ echo直接输出参数列表的值，且无返回值。 var_dump可以输出变量的类型和值。
+如:  &amp;lt;?php $a = array(1,2,array(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;)); var_dump($a); ?&amp;gt; 输出: array(3) { [0]=&amp;gt; int(1) [1]=&amp;gt; int(2) [2]=&amp;gt; array(3) { [0]=&amp;gt; string(1) &amp;quot;a&amp;quot; [1]=&amp;gt; string(1) &amp;quot;b&amp;quot; [2]=&amp;gt; string(1) &amp;quot;c&amp;quot; } }  &amp;lt;?php $b = 3.1; $c = true; var_dump($b,$c); ?&amp;gt; 输出: float(3.1) bool(true)  string 字符串 单引号不能识别变量名。
+双引号形式可以识别变量名。
+&amp;lt;?php $name = &#39;李白&#39;; echo &#39;$name是我的名字&amp;lt;br&amp;gt;&#39;; echo $name.&#39;是我的名字&amp;lt;br&amp;gt;&#39;; echo &amp;quot;${name}是我的名字&amp;lt;br&amp;gt;&amp;quot;; echo &amp;quot;{$name}是我的名字&amp;quot;; ?&amp;gt; 输出: $name是我的名字 李白是我的名字 李白是我的名字 李白是我的名字  字符串的另外一种形式&amp;ndash;Heredoc结构形式 &amp;lt;?</description>
+    </item>
+    
+    <item>
+      <title>常量类型</title>
+      <link>https://hdsum.github.io/2018/12/%E5%B8%B8%E9%87%8F%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E5%B8%B8%E9%87%8F%E7%B1%BB%E5%9E%8B/</guid>
+      <description>常量 自定义PHP常量 define()函数的语法格式为：
+&amp;#160;&amp;#160;bool define(string $constant_name, mixed $value[, $case_sensitive = true])
+它有3个参数：
+ 第一个参数“constant_name”为必选参数，常量名称,即标志符，常量的命名规则与变量的一致，但是要注意哦，它可不带美元符号哦。 第二个参数“value”为必选参数，它是常量的值。 第三个参数“case_sensitive”为可选参数，指定是否大小写敏感，设定为true表示不敏感，一般不指定第三个参数的情况下，默认第三个参数的值为false。  
+&amp;lt;?php $p = &amp;quot;PII&amp;quot;; define(&amp;quot;PI&amp;quot;,3.14); define($p,3.14); echo PI; echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; echo PII; ?&amp;gt; 输出: 3.14 3.14  PHP系统常量 系统常量是PHP已经定义好的常量，我们可以直接拿来使用，常见的系统常量有：
+ FILE :php程序文件名。它可以帮助我们获取当前文件在服务器的物理位置。 LINE :PHP程序文件行数。它可以告诉我们，当前代码在第几行。 PHP_VERSION:当前解析器的版本号。它可以告诉我们当前PHP解析器的版本号，我们可以提前知道我们的PHP代码是否可被该PHP解析器解析。 PHP_OS：执行当前PHP版本的操作系统名称。它可以告诉我们服务器所用的操作系统名称，我们可以根据该操作系统优化我们的代码。   &amp;lt;?php echo __FILE__; echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; echo __LINE__; echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; echo PHP_VERSION; echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; echo PHP_OS; echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; ?&amp;gt; 输出: /var/www/web/data/1543216683/script.</description>
+    </item>
+    
+    <item>
+      <title>异常</title>
+      <link>https://hdsum.github.io/2018/12/%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E5%BC%82%E5%B8%B8/</guid>
+      <description>异常 &amp;emsp;&amp;emsp;异常抛出被用于在遇到未知错误，或者不符合预先设定的条件时，通知客户程序，以便进行其他相关处理，不至于使程序直接报错中断。
+当代码中使用了try catch的时候，抛出的异常会在catch中捕获，否则会直接中断。
+1、基本语法  try{ //可能出现错误或异常的代码 //catch表示捕获，Exception是php已定义好的异常类 } catch(Exception $e){ //对异常处理，方法： //1、自己处理 //2、不处理，将其再次抛出 }  2、处理处理程序应当包括：  Try - 使用异常的函数应该位于 &amp;ldquo;try&amp;rdquo; 代码块内。如果没有触发异常，则代码将照常继续执行。但是如果异常被触发，会抛出一个异常。 Throw - 这里规定如何触发异常。注意：每一个 &amp;ldquo;throw&amp;rdquo; 必须对应至少一个 &amp;ldquo;catch&amp;rdquo;，当然可以对应多个&amp;rdquo;catch&amp;rdquo; Catch - &amp;ldquo;catch&amp;rdquo; 代码块会捕获异常，并创建一个包含异常信息的对象。  //创建可抛出一个异常的函数 function checkNum($number){ if($number&amp;gt;1){ throw new Exception(&amp;quot;异常提示-数字必须小于等于1&amp;quot;); } return true; } //在 &amp;quot;try&amp;quot; 代码块中触发异常 try{ checkNum(2); //如果异常被抛出，那么下面一行代码将不会被输出 echo &#39;如果能看到这个提示，说明你的数字小于等于1&#39;; }catch(Exception $e){ //捕获异常 echo &#39;捕获异常: &#39; .$e-&amp;gt;getMessage(); }  上面代码将获得类似这样一个错误：
+捕获异常:: 异常提示-数字必须小于等于1
+例子解释：  上面的代码抛出了一个异常，并捕获了它： 创建 checkNum() 函数。它检测数字是否大于 1。如果是，则抛出一个异常。 在 &amp;ldquo;try&amp;rdquo; 代码块中调用 checkNum() 函数。 checkNum() 函数中的异常被抛出 &amp;ldquo;catch&amp;rdquo; 代码块接收到该异常，并创建一个包含异常信息的对象 ($e)。 通过从这个 exception 对象调用 $e-&amp;gt;getMessage()，输出来自该异常的错误消息  异常处理类 PHP具有很多异常处理类，其中Exception是所有异常处理的基类。</description>
+    </item>
+    
+    <item>
+      <title>循环</title>
+      <link>https://hdsum.github.io/2018/12/%E5%BE%AA%E7%8E%AF/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E5%BE%AA%E7%8E%AF/</guid>
+      <description>循环结构 foreach循环语句 只取值，不取下标 &amp;lt;?php $students = array( &#39;2010&#39;=&amp;gt;&#39;令狐冲&#39;, &#39;2011&#39;=&amp;gt;&#39;林平之&#39;, &#39;2012&#39;=&amp;gt;&#39;曲洋&#39;, &#39;2013&#39;=&amp;gt;&#39;任盈盈&#39;, &#39;2014&#39;=&amp;gt;&#39;向问天&#39;, &#39;2015&#39;=&amp;gt;&#39;任我行&#39;, &#39;2016&#39;=&amp;gt;&#39;冲虚&#39;, &#39;2017&#39;=&amp;gt;&#39;方正&#39;, &#39;2018&#39;=&amp;gt;&#39;岳不群&#39;, &#39;2019&#39;=&amp;gt;&#39;宁中则&#39;, );//10个学生的学号和姓名，用数组存储 //使用循环结构遍历数组,获取学号和姓名 foreach($students as $v) { echo $v;//输出（打印）姓名 echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; } ?&amp;gt; 输出: 令狐冲 林平之 曲洋 任盈盈 向问天 任我行 冲虚 方正 岳不群 宁中则  同时取下标和值 &amp;lt;?php $students = array( &#39;2010&#39;=&amp;gt;&#39;令狐冲&#39;, &#39;2011&#39;=&amp;gt;&#39;林平之&#39;, &#39;2012&#39;=&amp;gt;&#39;曲洋&#39;, &#39;2013&#39;=&amp;gt;&#39;任盈盈&#39;, &#39;2014&#39;=&amp;gt;&#39;向问天&#39;, &#39;2015&#39;=&amp;gt;&#39;任我行&#39;, &#39;2016&#39;=&amp;gt;&#39;冲虚&#39;, &#39;2017&#39;=&amp;gt;&#39;方正&#39;, &#39;2018&#39;=&amp;gt;&#39;岳不群&#39;, &#39;2019&#39;=&amp;gt;&#39;宁中则&#39;, );//10个学生的学号和姓名，用数组存储 //使用循环结构遍历数组,获取学号和姓名 foreach($students as $key =&amp;gt;$v) { echo $key.&amp;quot;:&amp;quot;.$v;//输出（打印）学号：姓名 echo &amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; } ?</description>
+    </item>
+    
+    <item>
+      <title>数组</title>
+      <link>https://hdsum.github.io/2018/12/%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E6%95%B0%E7%BB%84/</guid>
+      <description>数组 数组的定义 &amp;lt;?php header(&#39;Content-type:text/html; charset=utf-8&#39;); //使用array()创建数组 $seasons_en = array(&amp;quot;spring&amp;quot; ,&amp;quot;summer &amp;quot;,&amp;quot;autumn&amp;quot;,&amp;quot; winter&amp;quot;); //使用 PHP 5.4 新语法[ ]创建数组 $seasons_ch = [&amp;quot; 春&amp;quot;,&amp;quot;夏&amp;quot;,&amp;quot;秋&amp;quot;,”冬&amp;quot;]; echo &amp;quot;$seasons_en[2] =&amp;gt; $seasons_ch[2]&amp;quot;; ?&amp;gt;  数组的输出 print_r() 显示关于一个变量的易于理解的信息。
+&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;如果给出的是 string、integer 或 float，将打印变量值本身。如果给出的是 array，将会按照一定格式显示键和元素。object 与数组类似。
+记住，print_r() 将把数组的指针移到最后边。使用 reset() 可让指针回到开始处。 
+&amp;lt;?php //创建一个关联数组，关联数组的键“orange”，值是“橘子” $a = array( &#39;a&#39;=&amp;gt;&amp;quot;apple&amp;quot;, &#39;b&#39;=&amp;gt;&amp;quot;banana&amp;quot;, &#39;c&#39;=&amp;gt;array(&#39;x&#39;,&#39;y&#39;,&#39;z&#39;) ); print_r($a); ?&amp;gt; 输出: Array ( [a] =&amp;gt; apple [b] =&amp;gt; banana [c] =&amp;gt; Array ( [0] =&amp;gt; x [1] =&amp;gt; y [2] =&amp;gt; z ) )  关联数组初始化 &amp;lt;?</description>
+    </item>
+    
+    <item>
+      <title>文件操作</title>
+      <link>https://hdsum.github.io/2018/12/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <description>读取文件 &amp;emsp;&amp;emsp;PHP具有丰富的文件操作函数，最简单的读取文件的函数为file_get_contents，可以将整个文件全部读取到一个字符串中。
+$content = file_get_contents(&#39;./test.txt&#39;); file_get_contents也可以通过参数控制读取内容的开始点以及长度。 $content = file_get_contents(&#39;./test.txt&#39;, null, null, 100, 500);  &amp;emsp;&amp;emsp;PHP也提供类似于C语言操作文件的方法，使用fopen，fgets，fread等方法，fgets可以从文件指针中读取一行，freads可以读取指定长度的字符串。
+$fp = fopen(&#39;./text.txt&#39;, &#39;rb&#39;); while(!feof($fp)) { echo fgets($fp); //读取一行 } fclose($fp);  $fp = fopen(&#39;./text.txt&#39;, &#39;rb&#39;); $contents = &#39;&#39;; while(!feof($fp)) { $contents .= fread($fp, 4096); //一次读取4096个字符 } fclose($fp);  &amp;emsp;&amp;emsp;使用fopen打开的文件，最好使用fclose关闭文件指针，以避免文件句柄被占用。
+判断文件是否存在 &amp;emsp;&amp;emsp;一般情况下在对文件进行操作的时候需要先判断文件是否存在，PHP中常用来判断文件存在的函数有两个is_file与file_exists.
+$filename = &#39;./test.txt&#39;; if (file_exists($filename)) { echo file_get_contents($filename); }  &amp;emsp;&amp;emsp;如果只是判断文件存在，使用file_exists就行，file_exists不仅可以判断文件是否存在，同时也可以判断目录是否存在，从函数名可以看出，is_file是确切的判断给定的路径是否是一个文件。
+$filename = &#39;./test.txt&#39;; if (is_file($filename)) { echo file_get_contents($filename); }  &amp;emsp;&amp;emsp;更加精确的可以使用is_readable与is_writeable在文件是否存在的基础上，判断文件是否可读与可写。</description>
+    </item>
+    
+    <item>
+      <title>正则表达式</title>
+      <link>https://hdsum.github.io/2018/12/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>正则表达式 基本语法 PCRE库函数中，正则匹配模式使用分隔符与元字符组成，
+分隔符可以是非数字、非反斜线、非空格的任意字符。
+经常使用的分隔符是正斜线(/)、hash符号(#) 以及取反符号(~)，例如：
+/foo bar/ #^[^0-9]$# ~php~  如果模式中包含分隔符，则分隔符需要使用反斜杠（\）进行转义。
+/http:\/\//  如果模式中包含较多的分割字符，建议更换其他的字符作为分隔符，也可以采用preg_quote进行转义。
+$p = &#39;http://&#39;; $p = &#39;/&#39;.preg_quote($p, &#39;/&#39;).&#39;/&#39;; echo $p;  分隔符后面可以使用模式修饰符，模式修饰符包括：i, m, s, x等，例如使用i修饰符可以忽略大小写匹配：
+$str = &amp;quot;Http://www.imooc.com/&amp;quot;; if (preg_match(&#39;/http/i&#39;, $str)) { echo &#39;匹配成功&#39;; }  修正模式  修正符:i 不区分大小写的匹配; 如:&amp;ldquo;/abc/i&amp;rdquo;可以与abc或aBC或ABc等匹配; 修正符:m 将字符串视为多行,不管是那行都能匹配;  例: 模式为:$mode=&amp;quot;/abc/m&amp;quot;; 要匹配的字符串为:$str=&amp;quot;bcefg5e\nabcdfe&amp;quot; 注意其中\n,换行了;abc换到了下一行; $str和$mode仍可以匹配,修正符m使得多行也可匹配; 修正符:s 将字符串视为单行,换行符作为普通字符;   修正符:x 将模式中的空白忽略; 修正符:A 强制从目标字符串开头匹配;  例:$mode=&amp;quot;/abc/A&amp;quot;; 可以与$str=&amp;quot;abcsdfi&amp;quot;匹配, 不可以与$str2=&amp;quot;sdsdabc&amp;quot;匹配; 因为$str2不是以abc开头;   修正符:D 如果使用$限制结尾字符,则不允许结尾有换行;  例:模式为:$mode=&amp;quot;/abc$/&amp;quot;; 可以与最后有换行的$str=&amp;quot;adshabc\n&amp;quot;匹配; 元子符$会忽略最后的换行\n; 如果模式为:$mode=&amp;quot;/abc/D&amp;quot;, 则不能与$str=&amp;quot;adshabc\n&amp;quot;匹配, 修正符D限制其不可有换行;必需以abc结尾;   修正符:U (添加)只匹配最近的一个字符串 不重复匹配 懒惰匹配  例如模式为: $mode=&amp;quot;/a.</description>
+    </item>
+    
+    <item>
+      <title>类与对象</title>
+      <link>https://hdsum.github.io/2018/12/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/</guid>
+      <description>类与对象 类与对象 通常定义一个汽车类的方法为：
+class Car { var $name = &#39;汽车&#39;; function getName() { return $this-&amp;gt;name; } }  类是一类东西的结构描述，而对象则是一类东西的一个具体实例，
+例如汽车这个名词可以理解为汽车的总类，但这辆汽车则是一个具体的汽车对象。
+对象通过new关键字进行实例化：
+$car = new Car(); echo $car-&amp;gt;getName();  类与对象看起来比较相似，但实际上有本质的区别，类是抽象的概念，对象是具体的实例。
+类可以使程序具有可重用性。
+访问控制 访问控制的关键字代表的意义为：
+ public：公开的(如果采用 var 定义，则被视为公有) protected：受保护的 private：私有的
+class Car { //定义公共属性 public $name = &#39;汽车&#39;; //定义受保护的属性 protected $corlor = &#39;白色&#39;; //定义私有属性 private $price = &#39;100000&#39;; }  默认都为public，外部可以访问。一般通过-&amp;gt;对象操作符来访问对象的属性或者方法，对于静态属性则使用::双冒号进行访问。当在类成员方法内部调用的时候，可以使用$this伪变量调用当前对象的属性。
+$car = new Car(); echo $car-&amp;gt;name; //调用对象的属性 echo $car-&amp;gt;color; //错误 受保护的属性不允许外部调用 echo $car-&amp;gt;price; //错误 私有属性不允许外部调用  受保护的属性与私有属性不允许外部调用，在类的成员方法内部是可以调用的。</description>
+    </item>
+    
+    <item>
+      <title>运算符</title>
+      <link>https://hdsum.github.io/2018/12/%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/12/%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      <description>运算符 赋值运算符 PHP的赋值运算符有两种，分别是：
+ “=”：把右边表达式的值赋给左边的运算数。它将右边表达式值复制一份，交给左边的运算数。换而言之，首先给左边的运算数申请了一块内存，然后把复制的值放到这个内存中。 “&amp;amp;”：引用赋值，意味着两个变量都指向同一个数据。它将使两个变量共享一块内存，如果这个内存存储的数据变了，那么两个变量的值都会发生变化。  &amp;lt;?php $a = &amp;quot;我在慕课网学习PHP！&amp;quot;; $b = $a; $c = &amp;amp;$a;	$a = &amp;quot;我天天在慕课网学习PHP！&amp;quot;; echo $b.&amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; echo $c.&amp;quot;&amp;lt;br /&amp;gt;&amp;quot;; ?&amp;gt; 输出: 我在慕课网学习PHP！ 我天天在慕课网学习PHP！  比较运算符    比较运算符 名称 示例 结果     == 等于 $a==$b 如果$a等于$b，返回TRUE。   === 全等 $a===$b 如果$a等于$b，并且它们的类型也相等，返回TRUE。   != 不等 $a!=$b 如果$a等于$b，返回TRUE。   &amp;lt;&amp;gt; 不等 $a&amp;lt;&amp;gt;$b 如果$a不等于$b，返回TRUE。   !== 非全等 $a!</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on JeremyL&#39;s Blog</title>
+    <link>https://hdsum.github.io/tags/python/</link>
+    <description>Recent content in Python on JeremyL&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hdsum.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Re</title>
+      <link>https://hdsum.github.io/2018/11/re/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/11/re/</guid>
+      <description>函数 说明     re.search() 在一个字符串中搜索匹配正则表达式的第一个位置，返回match对象   re.match() 从一个字符串的开始位置起匹配正则表达式，返回match对象   re.findall() 搜索字符串，以列表类型返回全部能匹配的子串   re.split() 将一个字符串按照正则表达式匹配结果进行分割，返回列表类型   re.finditer() 搜索字符串，返回一个匹配结果的迭代类型，每个迭代元素是match对象   re.sub() 在一个字符串中替换所有匹配正则表达式的子串，返回替换后的字符串    search &amp;#160; &amp;#160;re.search(pattern, string, flags=0)
+&amp;#160; &amp;#160;在一个字符串中搜索匹配正则表达式的第一个位置，返回match对象。
+ pattern:正则表达式的字符串或原生字符串表示 string:待匹配字符串 flags:正则表达式使用时的控制标记
+match &amp;#160; &amp;#160;re. match(pattern, string, flags=0)
+&amp;#160; &amp;#160;从一个字符串的开始位置起匹配正则表达式，返回match对象。
+ pattern:正则表达式的字符串或原生字符串表示
+ string:待匹配字符串
+ flags:正则表达式使用时的控制标记
+findall &amp;#160; &amp;#160;re.findall(pattern, string, flags=0)
+&amp;#160; &amp;#160;搜索字符串，以列表类型返回全部能匹配的子串。
+ pattern:正则表达式的字符串或原生字符串表示
+ string:待匹配字符串</description>
+    </item>
+    
+    <item>
+      <title>Requests</title>
+      <link>https://hdsum.github.io/2018/11/requests/</link>
+      <pubDate>Sat, 17 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hdsum.github.io/2018/11/requests/</guid>
+      <description>Requests Code &amp;#160; &amp;#160;这是一个Requests的简单程序(爬虫程序的一部分)。
+def getHTMLText(url): try: kv = {&#39;user-agent&#39;:&#39;Mozilla/5.0&#39;} # r = requests.get(url,headers=kv) # 修改requests请求的头部，防止某些网站过滤爬虫 kv = {&#39;wd&#39;:&#39;Python&#39;} # r = requests.get(url,params = kv) # 给requests的get提交添加参数 键值对存放在kv r = requests.get(url,timeout=30) # 增加延时判断 超过30为超时 爬取大量数据是不建议使用 r.raise_for_status() # 检验 HTTP 请求返回了的状态码 是否为200 (是否成功，200为成功) r.encoding = r.apparent_encoding # 将返回网页的编码改为 推荐编码 替换 默认编码(若HTML头部未声明，默认使用ISO编码) return r.text # 将网页内容返回 except: # 对网页请求的异常 进行处理 return &amp;quot;产生异常&amp;quot; #返回异常值可能是 网站禁止爬虫 需要手动修改爬虫的头部请求信息(header = kv)  关于POST与GET  r = requests.</description>
+    </item>
+    
+  </channel>
+</rss>
